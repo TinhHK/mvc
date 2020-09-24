@@ -1,3 +1,3 @@
 <?php
 
-echo "Hello you";
+var_dump($_SERVER['QUERY_STRING']);
