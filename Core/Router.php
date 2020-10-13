@@ -53,6 +53,42 @@ class Router {
 
     }
 
+    /* dispatch the route, create object calling method
+     * @param string $url
+     * @return void
+     */
+    public function dispatch($url)
+    {
+        if($this->match($url)){
+            $controller = $this->param['controller'];
+            $controller = $this->convertToStudlyCaps($controller);
+            if(class_exists($controller)){
+                $class = new $controller();
+                $action = $this->param['action'];
+                $action = $this->convertToCamelCase($action);
+                if(is_callable([$class, $action])) {
+                    $class->$action();
+                } else {
+                    echo "Method $action is not found";
+                }
+            } else {
+                echo "Class $controller is not found";
+            }
+        } else {
+            echo "$url not found";
+        }
+    }
+
+    private function convertToStudlyCaps($string)
+    {
+        return str_replace('-', '', ucwords($string, '-'));
+    }
+
+    private function convertToCamelCase($string)
+    {
+        return lcfirst($this->convertToStudlyCaps($string));
+    }
+
     public function getRoute()
     {
         return $this->route;
