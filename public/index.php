@@ -1,9 +1,14 @@
 <?php
 
-require '../Core/Router.php';
-require '../App/Controllers/Posts.php';
+spl_autoload_register(function($class){
+    $file = dirname(__DIR__).'/'.$class.'.php';
+    $file = str_replace('\\', '/', $file);
+    if(file_exists($file)){
+        require "$file";
+    }
+});
 
-$router = new Router();
+$router = new Core\Router();
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('posts', ['controller' => 'Posts', 'action' => 'index']);
