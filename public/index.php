@@ -9,6 +9,7 @@ $router->add('posts', ['Controller' => 'Posts', 'Action' => 'index']);
 $router->add('posts/new', ['Controller' => 'Posts', 'Action' => 'new']);
 $router->add('{controller}/{action}', ['controller' => 'add', 'action' => 'sad']);
 $router->add('admin/{action}/{controller}');
+$router->add('{controller}/{id:\d+}/{action}');
 
 $url = $_SERVER['QUERY_STRING'];
 

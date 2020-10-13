@@ -23,6 +23,8 @@ class Router {
         $route = preg_replace('/\//', '\/', $route);
         // convert variable
         $route = preg_replace('/\{([a-z]+)\}/', '(?<\1>[a-z-]+)', $route);
+        // convert id variable {id:\d+}
+        $route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?<\1>\2)', $route);
         // add start and end delimiters, and case insensitive flag
         $route = '/^'.$route.'$/i';
         $this->route[$route] = $param;
