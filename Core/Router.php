@@ -60,6 +60,7 @@ class Router {
      */
     public function dispatch($url)
     {
+        $url = $this->removeQueryString($url);
         if($this->match($url)){
             $controller = $this->param['controller'];
             $controller = 'App\Controllers\\'.$this->convertToStudlyCaps($controller);
@@ -78,6 +79,23 @@ class Router {
         } else {
             echo "$url not found";
         }
+    }
+
+    /* remove ?key=val&key2=val2...
+     * @param string $url
+     * @return string
+     */
+    private function removeQueryString($url)
+    {
+        if($url !== '') {
+            $parts = explode('&', $url, 2);
+            if(strpos($parts[0], '=') === false) {
+                $url = $parts[0];
+            } else {
+                $url = '';
+            }
+        }
+        return $url;
     }
 
     private function convertToStudlyCaps($string)
