@@ -65,7 +65,7 @@ class Router {
             $controller = $this->param['controller'];
             $controller = 'App\Controllers\\'.$this->convertToStudlyCaps($controller);
             if(class_exists($controller)){
-                $class = new $controller();
+                $class = new $controller($this->param);
                 $action = $this->param['action'];
                 $action = $this->convertToCamelCase($action);
                 if(is_callable([$class, $action])) {

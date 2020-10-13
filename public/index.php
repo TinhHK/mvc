@@ -21,8 +21,3 @@ $url = $_SERVER['QUERY_STRING'];
 
 $router->dispatch($url);
 
-//if($router->match($url)){
-//    var_dump($router->getParam());
-//} else {
-//    echo "Not found $url";
-//}
