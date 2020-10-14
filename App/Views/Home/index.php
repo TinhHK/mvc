@@ -8,7 +8,20 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <p>Hello from the view</p>
+<?php
+    if(isset($_POST['name'])){
+        echo htmlspecialchars("Hello {$_POST['name']}");
+    }
+?>
+<br>
+<form action="" method="post">
+    <div>
+        <label for="">Your name</label>
+        <input type="text" name="name" autofocus>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
 </body>
 </html>
