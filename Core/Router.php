@@ -63,7 +63,7 @@ class Router {
         $url = $this->removeQueryString($url);
         if($this->match($url)){
             $controller = $this->param['controller'];
-            $controller = 'App\Controllers\\'.$this->convertToStudlyCaps($controller);
+            $controller = $this->getNamespace().$this->convertToStudlyCaps($controller);
             if(class_exists($controller)){
                 $class = new $controller($this->param);
                 $action = $this->param['action'];
@@ -96,6 +96,15 @@ class Router {
             }
         }
         return $url;
+    }
+
+    private function getNamespace()
+    {
+        $namespace = 'App\Controllers\\';
+        if(isset($this->param['namespace'])) {
+            $namespace  = $namespace.$this->param['namespace'].'\\';
+        }
+        return $namespace;
     }
 
     private function convertToStudlyCaps($string)
