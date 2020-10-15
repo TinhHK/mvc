@@ -8,7 +8,7 @@ class Home extends \Core\Controller {
 
     public function indexAction()
     {
-        View::render('Home/index.php', [
+        View::renderTemplate('Home/index.html', [
             'name' => 'Mrktinh',
             'colors' => ['blue, red, yellow']
         ]);

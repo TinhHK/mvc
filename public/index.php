@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__DIR__).'/vendor/autoload.php';
+
 spl_autoload_register(function($class){
     $file = dirname(__DIR__).'/'.$class.'.php';
     $file = str_replace('\\', '/', $file);
