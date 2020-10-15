@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Controllers;
+use Core\View;
 
 class Posts extends \Core\Controller {
 
     public function indexAction()
     {
-        echo "Method index from Posts controller";
+        View::renderTemplate('Posts/index.html');
     }
 
     public function addNewAction()
