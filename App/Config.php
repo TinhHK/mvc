@@ -7,4 +7,5 @@ class Config {
     const DB = "mvc";
     const USER = "root";
     const PASS = "mysql";
+    const SHOW_ERRORS = true;
 }

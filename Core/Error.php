@@ -25,10 +25,22 @@ class Error {
      */
     public static function exceptionHandler($exception)
     {
-        echo '<h1>Fatal error</h1>';
-        echo '<p>Uncaught Exception: '.get_class($exception).'</p>';
-        echo '<p>Message: '.$exception->getMessage().'</p>';
-        echo '<p>Stack trace: <pre>'.$exception->getTraceAsString().'</pre></p>';
-        echo '<p>Throw in '.$exception->getFile(). ' in line '.$exception->getLine().'</p>';
+        if(\App\Config::SHOW_ERRORS) {
+            echo '<h1>Fatal error</h1>';
+            echo '<p>Uncaught Exception: '.get_class($exception).'</p>';
+            echo '<p>Message: '.$exception->getMessage().'</p>';
+            echo '<p>Stack trace: <pre>'.$exception->getTraceAsString().'</pre></p>';
+            echo '<p>Throw in '.$exception->getFile(). ' in line '.$exception->getLine().'</p>';
+        } else {
+            $logFile = dirname(__DIR__).'/logs/'.date('d-m-Y').'.txt';
+            ini_set('error_log', $logFile);
+            $message = "Uncaught Exception:  get_class($exception).";
+            $message .= "Message: ".$exception->getMessage();
+            $message .= "\nStack trace: ". $exception->getTraceAsString();
+            $message .= "\nThrow in ". $exception->getFile()." in line ".$exception->getLine();
+            error_log($message);
+            echo "<h1>An error occurs.</h1>";
+        }
+
     }
 }
