@@ -2,6 +2,7 @@
 
 namespace Core;
 use PDO;
+use App\Config;
 
 Abstract class Model {
 
@@ -9,12 +10,9 @@ Abstract class Model {
     {
         static $db = null;
         if($db === null){
-            $host = "localhost";
-            $db = "mvc";
-            $user = "root";
-            $pass = "mysql";
             try {
-                $db = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+                $dns = 'mysql:host='.Config::HOST.';dbname='.Config::DB;
+                $db = new PDO($dns, Config::USER, Config::PASS);
                 return $db;
             } catch (\PDOException $e) {
                 echo $e->getMessage();
