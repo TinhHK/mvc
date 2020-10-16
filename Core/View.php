@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class View {
+Abstract class View {
 
     /* Render a view file
      * @param string $view
