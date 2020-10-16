@@ -79,7 +79,7 @@ class Router {
                 throw new \Exception("Class $controller is not found");
             }
         } else {
-            throw new \Exception("$url not found");
+            throw new \Exception("$url not found", 404);
         }
     }
 

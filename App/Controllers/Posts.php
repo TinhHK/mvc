@@ -9,7 +9,7 @@ class Posts extends \Core\Controller {
     public function indexAction()
     {
         $post = Post::getAll();
-        View::renderTemplate('Posts/index.html', [
+        View::renderTemplate('Posts/inde.html', [
             'posts' => $post
         ]);
     }
