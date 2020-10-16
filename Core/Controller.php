@@ -19,7 +19,7 @@ Abstract class Controller {
                 $this->after();
             }
         } else {
-            echo "Method $action is not found";
+            throw new \Exception("Method $action not found in controller ".get_class($this));
         }
 
     }

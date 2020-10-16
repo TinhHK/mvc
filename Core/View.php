@@ -16,7 +16,7 @@ Abstract class View {
         if(is_readable($file)){
             require "$file";
         } else {
-            echo "No $view found";
+            throw new \Exception("No $view found");
         }
     }
 

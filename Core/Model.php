@@ -10,13 +10,11 @@ Abstract class Model {
     {
         static $db = null;
         if($db === null){
-            try {
-                $dns = 'mysql:host='.Config::HOST.';dbname='.Config::DB;
-                $db = new PDO($dns, Config::USER, Config::PASS);
-                return $db;
-            } catch (\PDOException $e) {
-                echo $e->getMessage();
-            }
+            $dns = 'mysql:host='.Config::HOST.';dbname='.Config::DB;
+            $db = new PDO($dns, Config::USER, Config::PASS);
+            // Throws an exception when an error occurs
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $db;
         }
     }
 }

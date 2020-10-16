@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use http\Exception;
+
 class Router {
 
     /* Routing table
@@ -71,13 +73,13 @@ class Router {
                 if(is_callable([$class, $action])) {
                     $class->$action();
                 } else {
-                    echo "Method $action is not found";
+                    throw new \Exception("Method $action is not found");
                 }
             } else {
-                echo "Class $controller is not found";
+                throw new \Exception("Class $controller is not found");
             }
         } else {
-            echo "$url not found";
+            throw new \Exception("$url not found");
         }
     }
 
