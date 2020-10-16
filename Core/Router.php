@@ -63,24 +63,30 @@ class Router {
     public function dispatch($url)
     {
         $url = $this->removeQueryString($url);
-        if($this->match($url)){
-            $controller = $this->param['controller'];
-            $controller = $this->getNamespace().$this->convertToStudlyCaps($controller);
-            if(class_exists($controller)){
-                $class = new $controller($this->param);
-                $action = $this->param['action'];
-                $action = $this->convertToCamelCase($action);
-                if(is_callable([$class, $action])) {
-                    $class->$action();
+        try {
+            if($this->match($url)){
+                $controller = $this->param['controller'];
+                $controller = $this->getNamespace().$this->convertToStudlyCaps($controller);
+                if(class_exists($controller)){
+                    $class = new $controller($this->param);
+                    $action = $this->param['action'];
+                    $action = $this->convertToCamelCase($action);
+                    if(is_callable([$class, $action])) {
+                        $class->$action();
+                    } else {
+                        throw new \Exception("Method $action is not found");
+                    }
                 } else {
-                    throw new \Exception("Method $action is not found");
+                    throw new \Exception("Class $controller is not found");
                 }
             } else {
-                throw new \Exception("Class $controller is not found");
+                throw new \Exception("$url not found");
             }
-        } else {
-            throw new \Exception("$url not found");
+        } catch (\Exception $ex) {
+            echo 'Ahihi';
         }
+
+
     }
 
     /* remove ?key=val&key2=val2...
