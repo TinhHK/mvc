@@ -27,7 +27,7 @@ class Error {
     {
         $code = $exception->getCode();
         if($code != 404){
-            $code = 505;
+            $code = 500;
         }
         http_response_code($code);
         if(\App\Config::SHOW_ERRORS) {
@@ -44,11 +44,12 @@ class Error {
             $message .= "\nStack trace: ". $exception->getTraceAsString();
             $message .= "\nThrow in ". $exception->getFile()." in line ".$exception->getLine();
             error_log($message);
-            if($code == 404){
-                echo "<h1>Page not found</h1>";
-            } else {
-                echo "<h1>An error occured</h1>";
-            }
+//            if($code == 404){
+//                echo "<h1>Page not found</h1>";
+//            } else {
+//                echo "<h1>An error occured</h1>";
+//            }
+            View::renderTemplate($code.'.html');
         }
 
     }
